@@ -1,0 +1,46 @@
+\documentclass[a4paper,11pt,oneside]{book}
+
+\usepackage{./layout/layout}	%Layout
+\usepackage{float}
+
+
+
+\newcommand{\docAuthor}{Luzian Raphael Aufdenblatten \& Julian Bischof }
+\title{[xyz]}
+\author{Luzian Raphael Aufdenblatten \& Julian Bischof}
+
+\begin{document}
+
+\pagestyle{AMZ}
+
+
+%---------- | < Titlepage > | ----------
+\thispagestyle{empty}
+\input{./src/0_titlepage}
+
+
+%---------- | < Frontmatter > | ----------
+\frontmatter	% enable roman numbering
+
+
+%----- | < Table of Contents > | -----
+%\settocfeature{}
+\tableofcontents
+\clearpage
+
+
+%----- | < Introduction > | -----
+\renewcommand{\thefootnote}{\fnsymbol{footnote}} 
+\chapter{Introduction }
+\addcontentsline{toc}{section}{Introduction} % common part
+\input{./src/0II_introduction}
+\clearpage
+
+
+%---------- | < Mainmatter > | ----------
+\mainmatter		%activates arabic enumeration
+%----- | < Section 1 > | -----
+\input{./src/1_section1.tex}
+
+
+\end{document}
