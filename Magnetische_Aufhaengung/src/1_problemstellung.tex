@@ -1,0 +1,109 @@
+\chapter{Problemstellung}\label{chap:Problemstellung}
+\section{Aufgabe 1}\label{sec:Aufgabe1}
+	\subsection*{Blockschaltbild des geregelten Systems}\label{sub:block_regel}
+	Das Blockschaltbild des geschlossenen Regelkreises ist in \autoref{dia:closed_loop} ersichtlich. Hierbei wird die Stecke wie auch das Stellglied  in $P$ zusammengefasst.
+	$S$ bezeichnet dabei die Totzeit und den Fehler der durch den Laserdistanzmesser in das System eingeführt wird.
+
+
+	\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[node distance=2cm]
+		
+      % Eingangsgröße
+	\node (r) {};
+	
+	% Summenpunkt
+	\node[circle, draw, right=of r] (sum) {};
+	\node[below right=0.2pt and 0.1pt of sum] {$-$};
+	\node[above left =2pt and 2pt of sum] {$+$};
+	
+	% Regler
+	\node[draw, rectangle, minimum width=1cm, minimum height=1cm,,right=of sum] (controller) {C $\frac{h}{i}$};
+	
+	% Strecke
+	\node[draw, rectangle,  minimum width=1cm, minimum height=1cm, right=of controller] (plant) {P};
+
+	% Sensor
+	\node[draw, rectangle,  minimum width=1cm, minimum height=1cm, below=0.5 of controller] (sensor) {S};
+	
+	% Ausgang
+	\node[right=of plant] (y) {};
+	
+	% Verbindungslinien
+	\draw[->] (r) -- (sum) node[midway, above]  {$x_{ref} (t) $};
+	\draw[->] (sum) -- (controller) node[midway, above] {$x_{\text{err}}$};
+	\draw[->] (controller) -- (plant) node[midway, above] {$i(t)$};
+	\draw[->] (plant) -- (y)  node[midway, above]  {$x(t)$};
+	
+	% Rückführung: von Linie abzweigen und unten herum zurück
+	\coordinate (tap) at ($(plant)!0.5!(y)$); % Punkt auf der Linie zwischen plant und y
+	\coordinate (feedback) at ($(sum)+(0,-2)$); % Punkt unterhalb des Summenpunkts
+	
+	\draw[->] (tap) |- (sensor) -| (sum);
+		
+	\end{tikzpicture}
+	\caption{Geschlossener Regelkreis}
+	\label{dia:closed_loop}
+\end{figure}
+
+	
+\section{Aufgabe 2}\label{sec:Aufgabe2}
+	\subsection*{Blockschaltbild des geregelten Systems mit Vorsteuerung}\label{sub:block_regel_FF}
+	Das Blockschaltbild aus \autoref{sec:Aufgabe1} wird in \autoref{dia:closed_loop_FF} um eine Vorsteuerung $FF$ erweitert.
+
+
+	\begin{figure}[h]
+	\centering
+	\begin{tikzpicture}[node distance=2cm]
+		
+      % Eingangsgröße
+	\node (r) {};
+	
+	% Summenpunkt
+	\node[circle, draw, right=of r] (sum) {};
+	\node[below right=0.2pt and 0.2pt of sum] {$-$};
+	\node[below left =-5pt and 0.2pt of sum] {$+$};
+
+	% Summenpunkt2
+	\node[circle, draw, right=of controller] (sum2) {};
+	\node[above right =0.2pt and -5pt of sum2] {$+$};
+	\node[below left =-5pt and 0.2pt of sum2] {$+$};
+	
+	% Regler
+	\node[draw, rectangle, minimum width=1cm, minimum height=1cm, right=of sum] (controller) {C $\frac{h}{i}$};
+	
+	% Strecke
+	\node[draw, rectangle,  minimum width=1cm, minimum height=1cm, right=of sum2] (plant) {P};
+
+	% Sensor
+	\node[draw, rectangle,  minimum width=1cm, minimum height=1cm, below=0.5 of controller] (sensor) {S};
+
+	% Vorsteuerung
+	\node[draw, rectangle, minimum width=1cm, minimum height=1cm, above=0.5 of controller] (prescaler) {FF$\frac{h}{i}$};
+
+
+	% Ausgang
+	\node[right=of plant] (y) {};
+	
+	% Verbindungslinien
+	\draw[->] (r) -- (sum) node[midway, above]  {$x_{ref} (t) $};
+	\draw[->] (sum) -- (controller) node[midway, above] {$x_{\text{err}}$};
+	\draw[->] (controller) -- (sum2) node[midway, above] {$i_C(t)$};
+	\draw[->] (sum2) -- (plant) node[midway, above] {$i(t)$};
+	\draw[->] (plant) -- (y)  node[midway, above]  {$x(t)$};
+	
+	% Rückführung: von Linie abzweigen und unten herum zurück
+	\coordinate (tap) at ($(plant)!0.5!(y)$); % Punkt auf der Linie zwischen plant und y
+	\coordinate (feedback) at ($(sum)+(0,-2)$); % Punkt unterhalb des Summenpunkts
+	\coordinate (feedforward) at ($(sum2)+(0,1)$); % Punkt unterhalb des Summenpunkts
+	\coordinate (tap_pre) at ($(sum)+(-0.5,0)$); % Punkt vor dem Summenpunkt
+	
+	\draw[->] (tap) |- (sensor) -| (sum);
+
+	\draw[->] (tap_pre) |-  (prescaler) -| (feedforward) node[midway, above]{$i_{FF}(t)$} -- (sum2) ;
+		
+	\end{tikzpicture}
+	\caption{Geschlossener Regelkreis erweitert mit einer Vorsteuerung}
+	\label{dia:closed_loop_FF}
+\end{figure}
+
