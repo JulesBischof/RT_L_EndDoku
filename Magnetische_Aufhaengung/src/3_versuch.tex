@@ -90,7 +90,7 @@
 \newpage
 \section{Aufgabe 17}\label{sec:Aufgabe17}
 	\subsection*{Simulation Führungssprung}
-	Zunächst wurde der PD-Regler mit einem Führungssprung von $x_0 = 40\si{\milli\meter}$ zu $x_1 = 35\si{\milli\meter}$ simuliert. In \autoref{fig:pd_simu} fällt dabei auf, dass der Regler zwar stabil scheint aber sich ein stationärer Fehler entsteht. Dieser Fehler ist ebenfalls weit von dem definierten Arbeitspunkt entfernt, womit der Regler möglicherweise am Versuch nicht funktionieren wird.
+	Zunächst wurde der PD-Regler mit einem Führungssprung von $x_0 = 40\si{\milli\meter}$ zu $x_1 = 35\si{\milli\meter}$ simuliert. In \autoref{fig:pd_simu} fällt dabei auf, dass der Regler zwar stabil, aber es scheint ein stationärer Fehler zu entstehen. Dieser Fehler ist ebenfalls weit von dem definierten Arbeitspunkt entfernt, womit der Regler möglicherweise am Versuch nicht funktionieren wird.
 			\begin{figure}[H]
 				\centering
 				\includegraphics[width=\textwidth]{./figure/PD_simu.pdf}
@@ -99,7 +99,7 @@
 			\end{figure}
 
 
-			Wird nun der PD-Regler auf einen PID-Regler erweitert, so stellt sich die gewünschten geregelten Distanzen von   $x_0 = 40\si{\milli\meter}$ zu $x_1 = 35\si{\milli\meter} $ korrekt ein, wie in \autoref{fig:pid_simu}	
+			Wird nun der PD-Regler auf einen PID-Regler erweitert, so stellen sich die gewünschten geregelten Distanzen von   $x_0 = 40\si{\milli\meter}$ zu $x_1 = 35\si{\milli\meter} $ korrekt ein, wie in \autoref{fig:pid_simu}zu sehen ist.
 			\begin{figure}[H]
 				\centering
 				\includegraphics[width=\textwidth]{./figure/PID_simu.pdf}
@@ -111,7 +111,7 @@
 \section{Aufgabe 18 und 19}\label{sec:Aufgabe1819}
 	\subsection*{Verifikation am Versuch - PD}
 
-	Der PD-Regler hat wie auch in der Simulation ersichtlich einen grossen stationären Fehler. Dies führt dazu, dass er bei $x_{ref}=40\si{\milli\meter}$ eine Distanz von $x_{eff}=60\si{\milli\meter}$ einzunehmen versucht. Dies ist zu weit entfernt, und der Laboraufbau kann nicht genug Strom liefern um den Ball auf Position zu halten. Deshalb wurde der Ball bei $x_0 = 30\si{\milli\meter}$ geregelt, um den simulierten Fehler trotzem überprüfen zu können.
+	Der PD-Regler hat wie auch in der Simulation ersichtlich einen grossen stationären Fehler. Dies führt dazu, dass er bei $x_{ref}=40\si{\milli\meter}$ eine Distanz von $x_{eff}=60\si{\milli\meter}$ einzunehmen versucht. Dies ist zu weit entfernt, und der Laboraufbau kann nicht genug Strom liefern um den Ball auf Position zu halten. Deshalb wurde der Ball bei $x_0 = 30\si{\milli\meter}$ geregelt, um den simulierten Fehler trotzdem überprüfen zu können.
 			
 		\begin{figure}[H]
 				\centering
@@ -195,7 +195,7 @@
 
 \section{Aufgabe 21}\label{sec:Aufgabe21}
 	\subsection*{Pole ausserhalb des Arbeitspunkts}
-	Wird nun der Arbeitspunkt weit weg vom Linearisierungspunkt gewählt wandern die Pole wiederum in die rechte Halbebene, was zu einem instabilen Prozess führt.
+	Wird nun der Arbeitspunkt weit weg vom Linearisierungspunkt gewählt, wandern die Pole wiederum in die rechte Halbebene, was zu einem instabilen Prozess führt.
 		\begin{table}[!h]
 			\renewcommand{\arraystretch}{1.2}
 			\centering
