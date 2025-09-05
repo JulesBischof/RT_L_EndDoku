@@ -1,13 +1,10 @@
+% Define Laplace symbol macro
 \newcommand{\laplace}{%
-  \tikz[baseline={(base)}, inner sep=0pt, outer sep=0pt]{
-    % Solid and hollow dots as nodes
-    \node[circle, fill, inner sep=1.5pt] (solid) at (0,0) {};
-    \node[draw, circle, inner sep=1.5pt] (hollow) at (0,.5) {};
-    % Connecting line
-    \draw (solid) -- (hollow);
-    % Baseline anchor
-    \coordinate (base) at (0,0);
-  }
+  \begin{tikzpicture}[baseline={(0,-0.1)}]
+    \fill (0,0) circle (2pt);      % solid dot
+    \draw (0,1) circle (2pt);      % hollow dot
+    \draw (0,0) -- (0,1);          % line
+  \end{tikzpicture}%
 }
 
 \chapter{Modellierung}\label{chap:Modellierung}
@@ -24,9 +21,9 @@
 	\subsection*{Linearisierung}\label{sub:diffeq_lin}
 	Zur Linearisierung der Bewegungsdifferentialgleichung wird folgende Struktur der linearisierten Differentialgleichung eingesetzt:
 
-	\begin{align}\label{eq:lin_eq} 
+	\begin{align}
 		\Delta\ddot{x} &= k_x\Delta x + k_i\Delta i + k_s \Delta F_s
-	\end{align} 
+	\end{align} \label{eq:lin_eq} 
 
 	Die Faktoren $k_x$, $k_i$ und $k_s$ werden aus \autoref{eq:bewegungsgleichung} in einem Arbeitspunkt $x_o$ und $\bar{i}$ bestimmt. Dazu wird \autoref{eq:bewegungsgleichung} jeweils nach $\delta x$, $\delta i$ und $\delta F_s$ abgeleitet. Da für den Versuch die Störkraft $F_s = 0$ angenommen wird, muss $k_s$ nocht ermittelt werden. 
 
@@ -45,60 +42,21 @@
 
 	Werden nun \autoref{eq:kx} und \ref{eq:ki} in \autoref{eq:lin_eq} eingesetzt ergibt sich:
 
-	\begin{align}\label{eq:lin_eq_k} 
+	\begin{align}
 		\Delta\ddot{x} &= \frac{2g\bar{i}^2(3d_ix_0^2 + 2c_ix_0+b)}{(d_ix_0^3+c_ix_0^2+b_ix_0+a)^3}  \cdot \Delta x + \frac{-2g\bar{i}}{(a_i + b_ix_0 +c_ix_0^2 + d_ix_0^3)^2} \cdot \Delta i 
-	\end{align} 
+	\end{align} \label{eq:lin_eq_k} 
+
 
 \section{Aufgabe 5}\label{sec:Aufgabe5}
 	\subsection*{Übertragungsfunktion $G_{\mathrm{Strecke}}$ }\label{sub:transfer_Gstrecke}
 	Um die Übertragungsfunktion der Prozesstrecke $G_{\mathrm{Strecke}}$ zu finden, kann erneut \autoref{eq:lin_eq} bzw. \autoref{eq:lin_eq_k} genutzt werden.
 
 
-	\begin{align}\label{eq:G_strecke} 
-		\Delta \ddot{x} &= k_x \Delta x + k_i \Delta i \nonumber\\
-		\laplace \nonumber \\
-		s^2 \Delta X &= k_x \Delta X + k_i \Delta I  \notag  \\
-		G_{\mathrm{Strecke}}(s) &= \frac{\Delta X}{\Delta I} = \frac{k_i}{s^2-kx} \nonumber\\
-		G_{\mathrm{Strecke}}(s) &= \frac{\frac{-2g\bar{i}}{(a_i + b_ix_0 +c_ix_0^2 + d_ix_0^3)^2}}{s^2-\frac{2g\bar{i}^2(3d_ix_0^2 + 2c_ix_0+b)}{(d_ix_0^3+c_ix_0^2+b_ix_0+a)^3}}
-	\end{align}
+	\[
+\laplace \quad \Delta \ddot{x} = k_x \Delta x + k_i \Delta i + k_s \Delta F_s
+\]
 
-\newpage 
-
-\section{Aufgabe 6}\label{sec:Aufgabe6}
-	\subsection*{Statische Vorsteuerung}\label{sub:statisch_ff}
-	Der Einsatz einer statischen Vorsteuerung besteht darin, dass kein Regelfehler $e(t)$ nötig ist und somit nicht auf die Rückmeldung des Sensors gewartet werden muss. Die Regelung wird schneller.
-
-
-\section{Aufgabe 7}\label{sec:Aufgabe6}
-	\subsection*{Statische Vorsteuerung}\label{sub:statisch_ff}
-	Die statischen Vorsteuerungen $V_{\mathrm{L}}$ und 	$V_{\mathrm{NL}}$ ergeben sich aus $G_{\mathrm{Strecke}}^{-1}(s)$ wie folgt:
-	
-	\begin{align}\label{eq:VL} 
-		V_{\mathrm{L}} &= \left. G_{\mathrm{Strecke}}^{-1}(s) \right |_{s = 0} = \left. \frac{s^2-kx}{k_i} \right |_{s = 0}  \nonumber\\
-		V_{\mathrm{L}} &= \frac{-kx}{k_i}
-	\end{align} 
-
-	Für die non-lineare Vorsteuerung $V_{\mathrm{NL}}$ gilt kann das Polynom aus \autoref{sec:Aufgabe3} genutzt werden.
-
-\section{Aufgabe 8}\label{sec:Aufgabe8}
-	\subsection*{Übertragungsfunktion $G_{\mathrm{Stell}}$ }\label{sub:transfer_Gstell}
-	Mit der gegebenen Differentialgleichung des Stellglieds $u = Ri +L\frac{\mathrm{d}i}{\mathrm{d}t}$ kann die Übertragungsfunktion des Stellglieds $G_{\mathrm{Stell}}$ wie folgt gefunden werden:
-
-	\begin{align}\label{eq:G_stell} 
-		u &= Ri +L\frac{\mathrm{d}i}{\mathrm{d}t} \nonumber \\
-		\laplace \nonumber \\
-		U &= RI + sLI \nonumber \\
-		G_{\mathrm{Stell}}(s) &= \frac{I}{U} = \frac{1}{R+Ls} = \frac{1}{1+\frac{L}{R}s}
-	\end{align}
-\newpage
-\section{Aufgabe 9}\label{sec:Aufgabe9}
-	\subsection*{Nachstellzeit $T_i$ des Stellgliedreglers}\label{sub:transfer_Ti_Cstell}
-
-
-
-
-
-
-
-
+\[
+s^2 \Delta X = k_x \Delta X + k_i \Delta I
+\]
 
