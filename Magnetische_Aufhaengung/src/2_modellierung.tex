@@ -77,8 +77,10 @@
 		V_{\mathrm{L}} &= \left. G_{\mathrm{Strecke}}^{-1}(s) \right |_{s = 0} = \left. \frac{s^2-kx}{k_i} \right |_{s = 0}  \nonumber\\
 		V_{\mathrm{L}} &= \frac{-kx}{k_i}
 	\end{align} 
-
-	Für die non-lineare Vorsteuerung $V_{\mathrm{NL}}$ gilt kann das Polynom aus \autoref{sec:Aufgabe3} genutzt werden.
+	\begin{align}\label{eq:VL} 
+		V_{\mathrm{NL}} &= \left. G_{\mathrm{Strecke}}^{-1}(s) \right |_{s = 0} = \left. \frac{s^2-kx}{k_i} \right |_{s = 0}  \nonumber\\
+		V_{\mathrm{NL}} &= |d + cx_0^1 + bx_0^2 + ax_0^3|
+	\end{align} 
 
 \section{Aufgabe 8}\label{sec:Aufgabe8}
 	\subsection*{Übertragungsfunktion $G_{\mathrm{Stell}}$ }\label{sub:transfer_Gstell}
@@ -91,8 +93,34 @@
 		G_{\mathrm{Stell}}(s) &= \frac{I}{U} = \frac{1}{R+Ls} = \frac{1}{1+\frac{L}{R}s}
 	\end{align}
 \newpage
-\section{Aufgabe 9}\label{sec:Aufgabe9}
-	\subsection*{Nachstellzeit $T_i$ des Stellgliedreglers}\label{sub:transfer_Ti_Cstell}
+\section{Aufgaben 9 und 10}\label{sec:Aufgabe9_10}
+\subsection*{Nachstellzeit $T_{\mathrm{i}}$ des Stellgliedreglers und Übertragungsfunktion des Stellglieds}\label{sub:transfer_Ti_Cstell}
+
+Der Regler des Stellglieds besteht aus einem PI-Regler mit Übertragungsfunktion $C_{\mathrm{Stell}} = K_{PS} \left(1+\frac{1}{s+T_i} \right)$. Damit ergibt sich für das geregelte Stellglied: 
+	\begin{align}\label{eq:G_stell_closed} 
+		G_{\mathrm{StellClosed}} &= \frac{L_{\mathrm{Stell}}}{1 + L_{\mathrm{Stell}}} = \frac{C_{ \mathrm{Stell}}G_{\mathrm{Stell}} }{1 +  C_{\mathrm{Stell}}G_{\mathrm{Stell}}}	
+	\end{align}
+
+	Hierbei zeigt sich, dass mit $T_{s} = \frac{L}{R} = T_{i}$ ein PT-1 erreicht werden kann:
+	\begin{align}\label{eq:L_stell} 
+		L_{\mathrm{Stell}}  &= K_{PS} \left(1+\frac{1}{s+T_i} \right) \cdot \frac{K_{S}}{1 + T_{S}s} \nonumber \\
+							&= K_{PS} K_{S} \cdot \frac{1 + T_{S}}{T_{S}\left( 1 + T_{S} \right)} = \frac{K_{PS} K_{S} }{T_{S}}
+	\end{align}
+
+	Wird nun  \autoref{eq:L_stell} in \autoref{eq:G_stell_closed} eingesetzt ergibt sich die Übertragungsfunktion:
+	\begin{align}\label{eq:G_stell_closed2} 
+		G_{\mathrm{StellClosed}} &= \frac{K_{PS} K_{S}}{T_{s}s + K_{PS} K_{\mathrm{S}}}
+	\end{align}
+
+
+
+\section{Aufgabe 11}\label{sec:Aufgabe11}
+	\subsection*{Übertragungsfunktion $G_{\mathrm{Sensor}}$ }\label{sub:transfer_Gsensor}
+	Wir wissen, dass der sensor eine Totzeit $T_{t\mathrm{Sensor}}$ von $2.5 \si{\milli\second}$ aufweist. Somit kann seine Übertragungsfunktion $G_{\mathrm{Sensor}}$ mittels eines PT-1 Glieds beschrieben werden:
+
+	\begin{align}\label{eq:G_sens} 
+	G_{\mathrm{Sensor}} &= \frac{\Delta X_{m}}{\Delta X} = \frac{1}{1 + T_{t\mathrm{Sensor}}s}
+	\end{align}
 
 
 
